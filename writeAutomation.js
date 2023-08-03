@@ -1,34 +1,24 @@
-// <?xml version="1.0" encoding="utf-8" ?>
-
-// <AutomatedRun Cleanup="delete">
-
-//   <Model Path="C:\models\racadvancedsampleproject.rvt">
-
-//     <CheckSet Path="C:\models\Revit Model Dashboard.xml" ExportHtml="true" ExportExcel="true" HtmlFolder="C:\models\Folder2" ExcelPath="C:\models\Path.xlsx" CheckLinks="true" />
-
-//   </Model>
-
-// </AutomatedRun>
 const { writeFile } = require("fs");
-
+const path = require("path");
 const util = require("util");
 const writeFilePro = util.promisify(writeFile);
-async function writeAutomation() {
+async function writeAutomation(filePath, reportPath) {
   try {
+    const name = path.parse(filePath).name;
     const xml = `<?xml version="1.0" encoding="utf-8" ?>
     
     <AutomatedRun Cleanup="delete">
 
-    <Model Path="C:\\models\\racadvancedsampleproject.rvt">
+    <Model Path="${filePath}">
     
-    <CheckSet Path="C:\\models\\Revit Model Dashboard.xml" ExportHtml="true" ExportExcel="true" HtmlFolder="C:\\models\\Folder2" ExcelPath="C:\\models\\Path.xlsx" CheckLinks="true" />       
+    <CheckSet Path="C:\\models\\bestpractices-2023.xml" ExportHtml="true" ExportExcel="true" HtmlFolder="${reportPath}" ExcelPath="${reportPath}\\report.xlsx" CheckLinks="true" />       
     
     </Model>
     
     </AutomatedRun>
     `;
     await writeFilePro(
-      "C:\\ProgramData\\Autodesk\\AIT\\Model Checker\\2023\\Automated Runs\\att.xml",
+      `C:\\ProgramData\\Autodesk\\AIT\\Model Checker\\2023\\Automated Runs\\${filePath}.xml`,
       xml
     );
   } catch (err) {
@@ -36,7 +26,3 @@ async function writeAutomation() {
   }
 }
 module.exports = writeAutomation;
-
-// XML to write
-
-// Write XML to file
