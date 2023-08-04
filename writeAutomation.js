@@ -10,7 +10,7 @@ async function writeAutomation(filePath, reportPath, id) {
 
     <Model Path="${filePath}">
     
-    <CheckSet Path="C:\\\\models\\bestpractices-2023.xml" ExportHtml="true" ExportExcel="true" HtmlFolder="${reportPath}" ExcelPath="${reportPath}\\report.xlsx" CheckLinks="true" />       
+    <CheckSet Path="C:\\\\validation\\checkset\\bestpractices-2023.xml" ExportHtml="true" ExportExcel="true" HtmlFolder="${reportPath}" ExcelPath="${reportPath}\\report.xlsx" CheckLinks="true" />       
     
     </Model>
     
