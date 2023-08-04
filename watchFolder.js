@@ -1,7 +1,19 @@
-const chokidar = require("chokidar");
+const fs = require("fs"),
+  path = require("path");
+ function watchFile(name,onDelete) {
+  const filepath = `C:\\\\ProgramData\\Autodesk\\AIT\\Model Checker\\2023\\Automated Runs\\${name}.xml`;
 
-async function watchFolder(folderPath, callback) {
-  // Watch the current directory for changes
-  chokidar.watch(folderPath).on("add", async (path) => await callback());
+  const filedir = path.dirname(filepath);
+  const filename = path.basename(filepath);
+  fs.watch(filedir, function (event, who) {
+    if (event === "rename" && who === filename) {
+      if (fs.existsSync(filepath)) {
+console.log("create")
+      } else {
+     onDelete();
+     
+      }
+    }
+  });
 }
-module.exports = watchFolder;
+module.exports = watchFile;

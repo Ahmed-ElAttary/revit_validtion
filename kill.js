@@ -1,6 +1,6 @@
 const { exec } = require("child_process");
 
-async function kill(pid) {
+function kill(pid) {
   try {
     const command = `taskkill /pid ${pid} /f`;
     exec(command);
