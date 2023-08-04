@@ -23,9 +23,11 @@ app.post("/", async (req, res) => {
     res.send("finished");
   });
 });
-// app.post("/", (req, res) => {
-//   res.send("Hello World!");
-// });
+app.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  const report = await checkReport(id);
+  res.send(report);
+});
 app.listen(port, () => {
   console.log(`Server started on port ${port}🌍`);
 });
